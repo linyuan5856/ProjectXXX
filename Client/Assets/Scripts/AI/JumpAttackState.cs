@@ -19,7 +19,7 @@ public class JumpAttackState : State
         bJumpEnd = false;
         enemyManager.NavDisableAgent();
         enemyManager.isPreformingAttackAction = true;
-        //enemyAnimatorManager.EnemyPlayTargetAnimation("Jump_Attack", true);
+        enemyAnimatorManager.EnemyPlayTargetAnimation("Jump_Attack", true);
         enemyManager.currentRecoveryTime = currentRecoverTimer;
     }
     
@@ -31,6 +31,7 @@ public class JumpAttackState : State
 
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
     {
+       
         if (!bJumping)
             StartCoroutine(Jump(enemyManager.transform, enemyManager.currentTarget.transform));
         if (bJumpEnd)
@@ -45,7 +46,7 @@ public class JumpAttackState : State
 
         for (float time = 0; time < 1; time += Time.deltaTime * JumpSpeed)
         {
-            self.transform.position = Vector3.Lerp(startingPosition, target.position, time) + Vector3.up * HeightCurve.Evaluate(time);
+            self.transform.position = Vector3.Lerp(startingPosition, target.position, time) /*+ Vector3.up * HeightCurve.Evaluate(time)*/;
             self.transform.rotation = Quaternion.Slerp(self.rotation, Quaternion.LookRotation(target.transform.position - self.position), time);
             yield return null;
         }

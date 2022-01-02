@@ -21,10 +21,13 @@ public class AttackState : State
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats,
         EnemyAnimatorManager enemyAnimatorManager)
     {
-        float distanceFromTarget =
-            Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
+        float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
         RotateTowardsTargetWhileAttacking(enemyManager);
-        if (distanceFromTarget > enemyManager.maximumAttackRange) return pursueTargetState;
+        if (enemyManager.isInteracting)
+            return this;
+
+        if (distanceFromTarget > enemyManager.maximumAttackRange) 
+            return pursueTargetState;
         
         if (willDoComboOnNextAttack && enemyManager.canDoCombo)
             AttackTargetWithCombo(enemyAnimatorManager, enemyManager);
@@ -35,7 +38,9 @@ public class AttackState : State
             RollForComboChance(enemyManager);
         }
 
-        if (willDoComboOnNextAttack && hasPerformedAttack) return this;
+        if (willDoComboOnNextAttack && hasPerformedAttack)
+            return this;
+
         return combatStanceState;
     }
 
