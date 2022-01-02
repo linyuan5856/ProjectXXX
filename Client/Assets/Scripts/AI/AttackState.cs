@@ -18,12 +18,11 @@ public class AttackState : State
         enemyManager.NavDisableAgent();
     }
 
-    public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats,
-        EnemyAnimatorManager enemyAnimatorManager)
+    public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
     {
         float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
         RotateTowardsTargetWhileAttacking(enemyManager);
-        if (enemyManager.isInteracting)
+        if (enemyManager.isPreformingAttackAction)
             return this;
 
         if (distanceFromTarget > enemyManager.maximumAttackRange) 
@@ -81,7 +80,9 @@ public class AttackState : State
     private void RollForComboChance(EnemyManager enemyManager)
     {
         float comboChance = Random.Range(0, 100);
-        if (!enemyManager.allowAIToPerformCombo || !(comboChance <= enemyManager.comboLikelyHood)) return;
+        if (/*!enemyManager.allowAIToPerformCombo ||*/ !(comboChance <= enemyManager.comboLikelyHood))
+            return;
+
         if (currentAttack.comboAction != null)
         {
             willDoComboOnNextAttack = true;

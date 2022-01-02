@@ -18,7 +18,7 @@ public class CircleState : State
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
     {
         enemyManager.transform.LookAt(enemyManager.currentTarget.transform);
-        enemyManager.transform.RotateAround(enemyManager.currentTarget.transform.position, Vector3.up,30 * Time.deltaTime);
+        enemyManager.transform.RotateAround(enemyManager.currentTarget.transform.position, Vector3.up,50 * Time.deltaTime);
         DecideCirclingAction(enemyAnimatorManager);
         enemyAnimatorManager.anim.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
         enemyAnimatorManager.anim.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
