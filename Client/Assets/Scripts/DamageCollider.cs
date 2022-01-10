@@ -67,7 +67,7 @@ public class DamageCollider : MonoBehaviour
                     else if (playerStats != null)
                     {
                         EnemyManager manager =(EnemyManager)hitCharacterManager;
-                        if (manager.AttackState == Enemystates.JUMP_ATTACK)
+                        if (manager.AttackState == EnemyStates.JUMP_ATTACK)
                         {
 
                         }
