@@ -43,7 +43,7 @@ public class DamageCollider : MonoBehaviour
             if (owner.tag == "EnemyWeapon")
             {
                 PlayerStats playerStats = collision.GetComponentInParent<PlayerStats>();
-                CharacterManager playercharacterManager = collision.GetComponentInParent<CharacterManager>();
+                CharacterManager playercharacterManager = collision.GetComponentInParent<CharacterManager>();//玩家
                 BlockingCollider shield = collision.GetComponentInParent<CharacterManager>().GetComponentInChildren<BlockingCollider>();
                 hitCharacterManager.OnAttack();
                 if (playercharacterManager != null)
@@ -66,6 +66,12 @@ public class DamageCollider : MonoBehaviour
                     }
                     else if (playerStats != null)
                     {
+                        EnemyManager manager =(EnemyManager)hitCharacterManager;
+                        if (manager.AttackState == Enemystates.JUMP_ATTACK)
+                        {
+
+                        }
+
                         playerStats.TakeDamage(currentWeaponDamage);
                         //Debug.Log(currentWeaponDamage);
                     }

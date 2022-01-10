@@ -14,8 +14,8 @@ public class CombatStanceState : State
     public override void OnEnter(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
     {
         base.OnEnter(enemyManager, enemyStats, enemyAnimatorManager);
-        enemyAnimatorManager.anim.SetFloat("Vertical", 0);
-        enemyAnimatorManager.anim.SetFloat("Horizontal", 0);
+        enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.2f, Time.deltaTime);
+        enemyAnimatorManager.anim.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
         enemyManager.NavDisableAgent();
     }
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats,
@@ -65,7 +65,6 @@ public class CombatStanceState : State
         enemyManager.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,
         enemyManager.rotationSpeed / Time.deltaTime);
     }
-
 
     private void GetNewAttack(EnemyManager enemyManager)
     {

@@ -19,6 +19,7 @@ public class JumpAttackState : State
         bJumping = false;
         bJumpEnd = false;
         enemyManager.NavDisableAgent();
+        enemyManager.SetAttackState(EnemyStates.JUMP_ATTACK);
         enemyManager.isPreformingAttackAction = true;
         enemyManager.currentRecoveryTime = currentRecoverTimer;
         enemyAnimatorManager.EnemyPlayTargetAnimation("Jump_Attack", true);
@@ -30,8 +31,7 @@ public class JumpAttackState : State
         return distance >= MinJumpDistance && distance <= MaxJumpDistance;
     }
 
-    public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats,
-        EnemyAnimatorManager enemyAnimatorManager)
+    public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
     {
         if (!bJumping)
             StartCoroutine(Jump(enemyManager.transform, enemyManager.currentTarget.transform));
@@ -57,5 +57,10 @@ public class JumpAttackState : State
 
         yield return new WaitForSeconds(1.5f);
         bJumpEnd = true;
+    }
+
+    public override void OnExit(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
+    {
+        enemyManager.SetAttackState(EnemyStates.NONE);
     }
 }

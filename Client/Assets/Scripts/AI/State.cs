@@ -8,6 +8,11 @@ public abstract class State : MonoBehaviour
     {
         
     }
+
+    public virtual void OnExit(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
+    {
+
+    }
     
     // Start is called before the first frame update
     public abstract State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager);

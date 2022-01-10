@@ -16,6 +16,7 @@ public class AttackState : State
         enemyAnimatorManager.anim.SetFloat("Vertical", 0);
         enemyAnimatorManager.anim.SetFloat("Horizontal", 0);
         enemyManager.NavDisableAgent();
+        enemyManager.SetAttackState(EnemyStates.ATTACK);
     }
 
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
@@ -61,6 +62,7 @@ public class AttackState : State
         currentAttack = null;
     }
 
+
     private void RotateTowardsTargetWhileAttacking(EnemyManager enemyManager)
     {
         if (enemyManager.canRotate && enemyManager.isInteracting)
@@ -76,6 +78,7 @@ public class AttackState : State
                 enemyManager.rotationSpeed / Time.deltaTime);
         }
     }
+
 
     private void RollForComboChance(EnemyManager enemyManager)
     {
@@ -93,5 +96,11 @@ public class AttackState : State
             willDoComboOnNextAttack = false;
             currentAttack = null;
         }
+    }
+
+
+    public override void OnExit(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
+    {
+        enemyManager.SetAttackState(EnemyStates.NONE);
     }
 }

@@ -519,8 +519,8 @@ ModelImporter:
       name: GreatSword_Attack01
       takeName: GreatSword_Attack01_Inplace
       internalID: 0
-      firstFrame: 0
-      lastFrame: 272
+      firstFrame: 333
+      lastFrame: 807
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -530,8 +530,8 @@ ModelImporter:
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
       keepOriginalPositionY: 0
       keepOriginalPositionXZ: 1
@@ -547,6 +547,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.2659176
+        functionName: DrainStaminalLightAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.6517421
         functionName: CloseDamageCollider
         data: 
@@ -554,14 +561,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.7878788
+      - time: 0.74025977
         functionName: EnableCombo
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.95075756
+      - time: 0.7973184
         functionName: DisableCombo
         data: 
         objectReferenceParameter: {instanceID: 0}

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
+public enum EnemyStates { NONE, ATTACK, JUMP_ATTACK }
 public class EnemyManager : CharacterManager
 {
     // Start is called before the first frame update
@@ -10,11 +12,12 @@ public class EnemyManager : CharacterManager
     EnemyAnimatorManager enemyAnimatorManager;
     EnemyStats enemyStats;
 
+    private EnemyStates attackState;
     private NavMeshAgent navmeshAgent;
     public State currentState;
     public CharacterStats currentTarget;
     public Rigidbody enemyRigidbody;
-
+    public EnemyStates AttackState => attackState;
  
     public float stoppingDistance;
     public float rotationSpeed = 15;
@@ -90,6 +93,7 @@ public class EnemyManager : CharacterManager
             if (nextState != currentState)
             {
                 //Debug.Log((nextState));
+                currentState.OnExit(this, enemyStats, enemyAnimatorManager);
                 nextState.OnEnter(this, enemyStats, enemyAnimatorManager);
                 SwitchToNextState(nextState);
             }
@@ -112,6 +116,11 @@ public class EnemyManager : CharacterManager
         {
             isPreformingAttackAction = false;
         }
+    }
+
+    public void SetAttackState(EnemyStates state)
+    {
+        attackState = state;
     }
 }
   

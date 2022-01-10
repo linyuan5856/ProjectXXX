@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterManager : MonoBehaviour
 {
     // Start is called before the first frame update
-
+   
     [Header ("Combat Colliders")]
     public CriticalDamageCollider backStabCollider;
     public CriticalDamageCollider riposteCollider;
@@ -21,5 +21,7 @@ public class CharacterManager : MonoBehaviour
 
     public int pendingCriticalDamage;
 
-    public virtual void OnAttack(){}
+    public virtual void OnAttack()
+    {
+    }
 }
