@@ -172,7 +172,7 @@ public class PlayerLocomotion : MonoBehaviour
     }
     IEnumerator PosChange(Vector3 vector3, float dis)
     {
-        float time = 0.8f;
+        float time = 0.7f;
         float curtime = 0;
         int count = 0;
         while (true)

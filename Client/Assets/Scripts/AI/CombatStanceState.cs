@@ -7,8 +7,8 @@ public class CombatStanceState : State
     public PursueTargetState pursueTargetState;
     public CircleState circleState;
 
-    float verticalMovementValue = 0;
-    float horizontalMovementValue = 0;
+    //float verticalMovementValue = 0;
+    //float horizontalMovementValue = 0;
     public float distanceFromTarget;
 
     public override void OnEnter(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
@@ -23,15 +23,15 @@ public class CombatStanceState : State
     {
         distanceFromTarget =
             Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-        enemyAnimatorManager.anim.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
-        enemyAnimatorManager.anim.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
+        //enemyAnimatorManager.anim.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
+        //enemyAnimatorManager.anim.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
         attackState.hasPerformedAttack = false;
         HandleRotateTowardsTarget(enemyManager);
 
         if (enemyManager.isInteracting)
         {
-            enemyAnimatorManager.anim.SetFloat("Vertical", 0);
-            enemyAnimatorManager.anim.SetFloat("Horizontal", 0);
+            enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.2f, Time.deltaTime);
+            enemyAnimatorManager.anim.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
             return this;
         }
 
