@@ -25,8 +25,7 @@ public class PursueTargetState : State
         if (jumpOrAttack)
         {
             jumpOrAttack = false;
-            bool canUseJumpAttack =
-                jumpAttackState.CanUseSkill(enemyManager.transform, enemyManager.currentTarget.transform);
+            bool canUseJumpAttack = jumpAttackState.CanUseSkill(enemyManager.transform, enemyManager.currentTarget.transform);
             if (canUseJumpAttack) return jumpAttackState;
             return this;
         }

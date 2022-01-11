@@ -1797,15 +1797,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891174fe05fb485b8b088fb7e3e722ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinJumpDistance: 1.5
-  MaxJumpDistance: 15
+  MinJumpDistance: 5
+  MaxJumpDistance: 10
   pursueTargetState: {fileID: 738684434}
   HeightCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.0044568777
-      value: -0.0004542172
+      time: 0.09970645
+      value: 0.0002784212
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1813,8 +1813,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.15023641
-      value: 0.31142843
+      time: 0.22150965
+      value: 0.31011704
       inSlope: 2.8935301
       outSlope: 2.8935301
       tangentMode: 0
@@ -5149,6 +5149,7 @@ MonoBehaviour:
   combatStanceState: {fileID: 1360121106}
   verticalMovementValue: 0
   horizontalMovementValue: 0
+  distanceFromTarget: 0
 --- !u!1 &1411823098
 GameObject:
   m_ObjectHideFlags: 3

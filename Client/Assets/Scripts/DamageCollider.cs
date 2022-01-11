@@ -36,7 +36,6 @@ public class DamageCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        
         if (collision.tag == "Player")
         {
             //怪物打玩家
@@ -69,9 +68,10 @@ public class DamageCollider : MonoBehaviour
                         EnemyManager manager =(EnemyManager)hitCharacterManager;
                         if (manager.AttackState == EnemyStates.JUMP_ATTACK)
                         {
-
+                            playerStats.TakeDamage(currentWeaponDamage, "Damage_02");
+                            return;
                         }
-
+                        else 
                         playerStats.TakeDamage(currentWeaponDamage);
                         //Debug.Log(currentWeaponDamage);
                     }

@@ -21,7 +21,7 @@ public class CircleState : State
         distanceFromTarget =
             Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
         enemyManager.transform.LookAt(enemyManager.currentTarget.transform);
-        enemyManager.transform.RotateAround(enemyManager.currentTarget.transform.position, Vector3.up,150 * Time.deltaTime / distanceFromTarget);
+        enemyManager.transform.RotateAround(enemyManager.currentTarget.transform.position, Vector3.up,100 * Time.deltaTime / distanceFromTarget);
         DecideCirclingAction(enemyAnimatorManager);
         enemyAnimatorManager.anim.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
         enemyAnimatorManager.anim.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);

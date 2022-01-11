@@ -22,12 +22,12 @@ public class EnemyAnimatorManager :AnimatorManager
 
     public void CanRotate()
     {
-       // canRotate = true;
+       anim.SetBool("canRotate", true);
     }
 
     public void StopRotation()
     {
-        //canRotate = false;
+        anim.SetBool("canRotate", false);
     }
 
     public void EnableCombo()

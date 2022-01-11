@@ -67,7 +67,7 @@ public class EnemyManager : CharacterManager
 
         isInteracting =enemyAnimatorManager.anim.GetBool("isInteracting");
         canDoCombo = enemyAnimatorManager.anim.GetBool("canDoCombo");
-//        canRotate = enemyAnimatorManager.anim.GetBool("canRotate");
+        canRotate = enemyAnimatorManager.anim.GetBool("canRotate");
         enemyAnimatorManager.anim.SetBool("isDead", enemyStats.isDead);
         isRotatingWithRootMotion = enemyAnimatorManager.anim.GetBool("isRotatingWithRootMotion");
         enemyStats.RegenerateStamina();
