@@ -117,7 +117,7 @@ public class PlayerAttacker : MonoBehaviour
         if (playerManager.isBlocking)
             return;
 
-        animatorHandler.PlayTargetAnimation("Block_Start", false);
+        animatorHandler.PlayTargetAnimationWithoutFade("Block_Start", false);
         playerEquipmentManager.OpenBlockingCollider();
         playerManager.isBlocking = true;
     }

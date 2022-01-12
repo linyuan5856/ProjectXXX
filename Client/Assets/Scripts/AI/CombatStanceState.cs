@@ -6,10 +6,12 @@ public class CombatStanceState : State
     public EnemyAttackAction[] enemyAttacks;
     public PursueTargetState pursueTargetState;
     public CircleState circleState;
+    public TurnAttackState turnAttackState;
 
     //float verticalMovementValue = 0;
     //float horizontalMovementValue = 0;
-    public float distanceFromTarget;
+    private float distanceFromTarget;
+    private bool turnOrAttack;
 
     public override void OnEnter(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
     {
@@ -26,6 +28,7 @@ public class CombatStanceState : State
         //enemyAnimatorManager.anim.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
         //enemyAnimatorManager.anim.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
         attackState.hasPerformedAttack = false;
+        turnAttackState.hasPerformedTurnAttack = false;
         HandleRotateTowardsTarget(enemyManager);
 
         if (enemyManager.isInteracting)
@@ -40,10 +43,17 @@ public class CombatStanceState : State
 
         if (enemyStats.currentStamina <= 50) 
             return circleState;
-
-       
-
-        if (enemyManager.currentRecoveryTime <= 0 && attackState.currentAttack != null)
+        RollForTurnChance();
+        if (enemyManager.currentRecoveryTime <= 0  && turnOrAttack)
+        {
+            turnOrAttack = false;
+            bool canUseTurnAttack = turnAttackState.CanUseSkill(enemyManager.transform, enemyManager.currentTarget.transform);
+           
+            if (canUseTurnAttack) 
+                return turnAttackState;
+            return this;
+        }
+        else if (enemyManager.currentRecoveryTime <= 0 && attackState.currentAttack != null)
             return attackState;
         else
         {
@@ -59,11 +69,16 @@ public class CombatStanceState : State
         direction.y = 0;
         direction.Normalize();
 
-        if (direction == Vector3.zero) 
+        if (direction == Vector3.zero)
             direction = transform.forward;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         enemyManager.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,
         enemyManager.rotationSpeed / Time.deltaTime);
+
+        //var pos = enemyManager.currentTarget.transform.position;
+        //enemyManager.NavSetDestination(new Vector3(pos.x, 0f, pos.z));
+        //enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation,
+        //    enemyManager.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
     }
 
     private void GetNewAttack(EnemyManager enemyManager)
@@ -114,5 +129,11 @@ public class CombatStanceState : State
                 }
             }
         }
+    }
+
+    private void RollForTurnChance()
+    {
+        float turnChance = Random.Range(0, 100);
+        turnOrAttack = turnChance > 0;
     }
 }

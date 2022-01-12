@@ -20,7 +20,7 @@ public class AnimatorManager : MonoBehaviour
         anim.CrossFade(targetAnim, 0.2f);
     }
 
-    public void EnemyPlayTargetAnimationWithoutFade(string targetAnim, bool isInteracting)
+    public void PlayTargetAnimationWithoutFade(string targetAnim, bool isInteracting)
     {
         //anim.applyRootMotion = isInteracting;
         anim.SetBool("isInteracting", isInteracting);
