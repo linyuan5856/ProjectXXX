@@ -70,7 +70,7 @@ public class PlayerAttacker : MonoBehaviour
     public void Move()
     {
        
-        StartCoroutine(PosChange(0.4f,0.02f));
+        StartCoroutine(PosChange(0.4f,0.005f));
     }
 
     public void HandleLightAttack(WeaponItem weapon)

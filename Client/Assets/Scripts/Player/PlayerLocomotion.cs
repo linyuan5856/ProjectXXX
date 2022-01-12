@@ -153,7 +153,7 @@ public class PlayerLocomotion : MonoBehaviour
                 animatorHandler.PlayTargetAnimation("Rolling", true);
                 //rigidbody.AddForce(myTransform.forward * 5000f);
                 //rigidbody.velocity = myTransform.forward * 10f;
-                StartCoroutine(PosChange(myTransform.forward, 0.04f));
+                StartCoroutine(PosChange(myTransform.forward, 0.02f));
                 moveDirection.y = 0;
                 Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                 myTransform.rotation = rollRotation;
@@ -164,7 +164,7 @@ public class PlayerLocomotion : MonoBehaviour
                 if (playerStats.currentStamina < backstepStaminaCost)
                     return;
                 animatorHandler.PlayTargetAnimation("Backstep", true);
-                StartCoroutine(PosChange(-myTransform.forward, 0.02f));
+                StartCoroutine(PosChange(-myTransform.forward, 0.005f));
                 playerStats.TakeStaminaDamage(backstepStaminaCost);
             }
 
