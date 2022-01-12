@@ -22,7 +22,7 @@ public class JumpAttackState : State
         enemyManager.SetAttackState(EnemyStates.JUMP_ATTACK);
         enemyManager.isPreformingAttackAction = true;
         enemyManager.currentRecoveryTime = currentRecoverTimer;
-        enemyAnimatorManager.EnemyPlayTargetAnimation("Jump_Attack", true);
+        enemyAnimatorManager.EnemyPlayTargetAnimationWithoutFade("Jump_Attack", true);
     }
 
     public bool CanUseSkill(Transform self, Transform target)
