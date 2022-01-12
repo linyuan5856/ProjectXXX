@@ -44,11 +44,12 @@ public class JumpAttackState : State
     {
         bJumping = true;
         Vector3 startingPosition = self.position;
-        var offset = (target.position - startingPosition).normalized*2;
+        var offset = (target.position - startingPosition).normalized;
         offset = new Vector3(offset.x, 0f, offset.z);
+        var endPos = target.position - offset;
         for (float time = 0; time < 1; time += Time.deltaTime * JumpSpeed)
         {
-            self.transform.position = Vector3.Lerp(startingPosition, target.position-offset, time) +
+            self.transform.position = Vector3.Lerp(startingPosition, endPos, time) +
                                       Vector3.up * HeightCurve.Evaluate(time);
             self.transform.rotation = Quaternion.Slerp(self.rotation,
                 Quaternion.LookRotation(target.transform.position - self.position), time);
