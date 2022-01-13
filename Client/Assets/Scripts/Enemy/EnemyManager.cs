@@ -24,7 +24,7 @@ public class EnemyManager : CharacterManager
     public float maximumAttackRange;     //招架选择攻击状态的范围
    
 
-    public bool isInteracting;
+    //public bool isInteracting;
     public bool canRotate;
 
     //public EnemyAttackAction[] enemyAttacks;

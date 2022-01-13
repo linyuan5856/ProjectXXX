@@ -9,7 +9,7 @@ public class PlayerManager : CharacterManager
     PlayerLocomotion playerLocomotion;
     PlayerStats playerStats;
 
-    public bool isInteracting;
+   // public bool isInteracting;
 
     [Header("Player Flags")]
     public bool isSprinting;

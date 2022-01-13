@@ -46,6 +46,7 @@ public class DamageCollider : MonoBehaviour
                     PlayerStats playerStats = collision.GetComponentInParent<PlayerStats>();
                     CharacterManager playercharacterManager = collision.GetComponentInParent<CharacterManager>();//玩家
                     BlockingCollider shield = collision.GetComponentInParent<CharacterManager>().GetComponentInChildren<BlockingCollider>();
+                    playercharacterManager.isInteracting = true;
                     hitCharacterManager.OnAttack();
                     if (playercharacterManager != null)
                     {

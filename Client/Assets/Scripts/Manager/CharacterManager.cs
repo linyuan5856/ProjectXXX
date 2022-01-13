@@ -5,7 +5,8 @@ using UnityEngine;
 public class CharacterManager : MonoBehaviour
 {
     // Start is called before the first frame update
-   
+    public bool isInteracting;
+
     [Header ("Combat Colliders")]
     public CriticalDamageCollider backStabCollider;
     public CriticalDamageCollider riposteCollider;
