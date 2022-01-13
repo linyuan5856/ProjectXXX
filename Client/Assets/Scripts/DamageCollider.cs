@@ -11,7 +11,7 @@ public class DamageCollider : MonoBehaviour
 
     public int currentWeaponDamage = 5;
     GameObject owner;
-    
+    float lastTime;
     private void Awake()
     {
         damageCollider = GetComponent<Collider>();
@@ -36,79 +36,93 @@ public class DamageCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.tag == "Player")
+        if (Time.time - lastTime > 0.5f)
         {
-            //怪物打玩家
-            if (owner.tag == "EnemyWeapon")
+            if (collision.tag == "Player")
             {
-                PlayerStats playerStats = collision.GetComponentInParent<PlayerStats>();
-                CharacterManager playercharacterManager = collision.GetComponentInParent<CharacterManager>();//玩家
-                BlockingCollider shield = collision.GetComponentInParent<CharacterManager>().GetComponentInChildren<BlockingCollider>();
-                hitCharacterManager.OnAttack();
-                if (playercharacterManager != null)
+                //怪物打玩家
+                if (owner.tag == "EnemyWeapon")
                 {
-                    if (playercharacterManager.isParrying)
+                    PlayerStats playerStats = collision.GetComponentInParent<PlayerStats>();
+                    CharacterManager playercharacterManager = collision.GetComponentInParent<CharacterManager>();//玩家
+                    BlockingCollider shield = collision.GetComponentInParent<CharacterManager>().GetComponentInChildren<BlockingCollider>();
+                    hitCharacterManager.OnAttack();
+                    if (playercharacterManager != null)
                     {
-                        //Debug.Log(characterManager.GetComponentInChildren<AnimatorManager>());
-                        hitCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
-                        return;
-                    }
-                    else if (shield != null && playercharacterManager.isBlocking)
-                    {
-                        float physicalDamageAfterBlock = currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
-                        
-                        if(playerStats != null)
+                        if (playercharacterManager.isParrying)
                         {
-                            playerStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block_Guard");
+                            //Debug.Log(characterManager.GetComponentInChildren<AnimatorManager>());
+                            hitCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
+                            lastTime = Time.time;
                             return;
                         }
-                    }
-                    else if (playerStats != null)
-                    {
-                        EnemyManager manager =(EnemyManager)hitCharacterManager;
-                        if (manager.AttackState == EnemyStates.JUMP_ATTACK)
+                        else if (shield != null && playercharacterManager.isBlocking)
                         {
-                            playerStats.TakeDamage(currentWeaponDamage, "Damage_02");
-                            return;
-                        }
-                        else 
-                        playerStats.TakeDamage(currentWeaponDamage);
-                        //Debug.Log(currentWeaponDamage);
-                    }
-                }
-                
-            }
-        }
+                            float physicalDamageAfterBlock = currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
 
-        if (collision.tag == "Enemy")
-        {
-            //玩家打怪物
-            if (owner.tag == "PlayerWeapon")
-            {
-                EnemyStats enemyStats = collision.GetComponentInParent<EnemyStats>();
-                CharacterManager enemycharacterManager = collision.GetComponentInParent<CharacterManager>();
-                BlockingCollider shield = collision.GetComponentInParent<CharacterManager>().GetComponentInChildren<BlockingCollider>();
-                //Shake(0);
-                hitCharacterManager.OnAttack();
-                
-                if (enemycharacterManager != null)
-                {
-                    if (enemycharacterManager.isParrying)
-                    {
-                        hitCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
-                        return;
+                            if (playerStats != null)
+                            {
+                                playerStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block_Guard");
+                                lastTime = Time.time;
+                                return;
+                            }
+                        }
+                        else if (playerStats != null)
+                        {
+                            EnemyManager manager = (EnemyManager)hitCharacterManager;
+                            if (manager.AttackState == EnemyStates.JUMP_ATTACK)
+                            {
+                                playerStats.TakeDamage(currentWeaponDamage, "Damage_02");
+                                lastTime = Time.time;
+                                return;
+                            }
+                            else
+                                playerStats.TakeDamage(currentWeaponDamage);
+                                lastTime = Time.time;
+                                return;
+
+                        }
                     }
-                    else if (enemyStats != null)
+
+                }
+            }
+
+            else if (collision.tag == "Enemy")
+            {
+                //玩家打怪物
+                if (owner.tag == "PlayerWeapon")
+                {
+                    EnemyStats enemyStats = collision.GetComponentInParent<EnemyStats>();
+                    CharacterManager enemycharacterManager = collision.GetComponentInParent<CharacterManager>();
+                    BlockingCollider shield = collision.GetComponentInParent<CharacterManager>().GetComponentInChildren<BlockingCollider>();
+                    //Shake(0);
+                    hitCharacterManager.OnAttack();
+
+                    if (enemycharacterManager != null)
                     {
-                        enemyStats.TakeDamage(currentWeaponDamage);
+                        if (enemycharacterManager.isParrying)
+                        {
+                            hitCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
+                            lastTime = Time.time;
+                            return;
+                        }
+                        else if (enemyStats != null)
+                        {
+                            enemyStats.TakeDamage(currentWeaponDamage);
+                            lastTime = Time.time;
+                            return;
+                        }
                     }
                 }
             }
         }
+            
     }
 
      private void Shake(int a)
      {
          cameraManager.ShakeScreen(a);
      } 
+
+   
 }

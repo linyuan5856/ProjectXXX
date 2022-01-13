@@ -94,15 +94,6 @@ public class EnemyWeaponSlotManager : MonoBehaviour
         rightHandDamageCollider.DisableDamageCollider();
     }
 
-    public void EnableCombo()
-    {
-        //anim.SetBool("canDoCombo", true);
-    }
-
-    public void DisableCombo()
-    {
-        //anim.SetBool("canDoCombo", false);
-    }
     
     #region Handle Weapon's Stamina Drainage
     public void DrainStaminalLightAttack()
