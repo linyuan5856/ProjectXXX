@@ -25,4 +25,9 @@ public class CharacterManager : MonoBehaviour
     public virtual void OnAttack()
     {
     }
+
+    public virtual void OnBeHit(int damage)
+    {
+
+    }
 }

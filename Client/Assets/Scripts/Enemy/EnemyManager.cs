@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public enum EnemyStates { NONE, ATTACK, JUMP_ATTACK }
+public enum EnemyStates { NONE, ATTACK, JUMP_ATTACK}
 public class EnemyManager : CharacterManager
 {
     // Start is called before the first frame update
@@ -18,7 +18,7 @@ public class EnemyManager : CharacterManager
     public CharacterStats currentTarget;
     public Rigidbody enemyRigidbody;
     public EnemyStates AttackState => attackState;
- 
+    public BeHitState beHitState;  
     public float stoppingDistance;
     public float rotationSpeed = 15;
     public float maximumAttackRange;     //招架选择攻击状态的范围
@@ -86,23 +86,32 @@ public class EnemyManager : CharacterManager
     
     private void HandleStateMachine()
     {
-
-        if (currentState != null)
+        if (currentState == null) return;
+        State nextState = currentState.Tick(this, enemyStats, enemyAnimatorManager);
+        if (nextState != currentState)
         {
-            State nextState = currentState.Tick(this, enemyStats, enemyAnimatorManager);
-            if (nextState != currentState)
-            {
-                //Debug.Log((nextState));
-                currentState.OnExit(this, enemyStats, enemyAnimatorManager);
-                nextState.OnEnter(this, enemyStats, enemyAnimatorManager);
-                SwitchToNextState(nextState);
-            }
+            SwitchToNextState(nextState);
         }
+        //if (currentState != null)
+        //{
+        //    State nextState = currentState.Tick(this, enemyStats, enemyAnimatorManager);
+        //    if (nextState != currentState)
+        //    {
+        //        //Debug.Log((nextState));
+        //        currentState.OnExit(this, enemyStats, enemyAnimatorManager);
+        //        nextState.OnEnter(this, enemyStats, enemyAnimatorManager);
+        //        SwitchToNextState(nextState);
+        //    }
+        //}
     }
 
     private void SwitchToNextState(State state)
     {
+        if (state == null) return;
+        currentState?.OnExit(this, enemyStats, enemyAnimatorManager);
         currentState = state;
+        currentState.OnEnter(this, enemyStats, enemyAnimatorManager);
+        //currentState = state;
     }
 
     private void HandleRecoveryTimer()
@@ -121,6 +130,20 @@ public class EnemyManager : CharacterManager
     public void SetAttackState(EnemyStates state)
     {
         attackState = state;
+    }
+
+    float lastTime;
+
+    public override void OnBeHit(int currentWeaponDamage)
+    {
+        if (Time.time - lastTime < 0.5f) return;
+        lastTime = Time.time;
+        if (enemyStats != null)
+        {
+            enemyStats.TakeDamage(currentWeaponDamage);
+            SwitchToNextState(beHitState);
+        }
+
     }
 }
   

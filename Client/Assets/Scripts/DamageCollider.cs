@@ -93,27 +93,27 @@ public class DamageCollider : MonoBehaviour
                 //玩家打怪物
                 if (owner.tag == "PlayerWeapon")
                 {
-                    EnemyStats enemyStats = collision.GetComponentInParent<EnemyStats>();
+                    //EnemyStats enemyStats = collision.GetComponentInParent<EnemyStats>();
                     CharacterManager enemycharacterManager = collision.GetComponentInParent<CharacterManager>();
-                    BlockingCollider shield = collision.GetComponentInParent<CharacterManager>().GetComponentInChildren<BlockingCollider>();
-                    //Shake(0);
+                    //BlockingCollider shield = collision.GetComponentInParent<CharacterManager>().GetComponentInChildren<BlockingCollider>();
+                    Shake(0);
                     hitCharacterManager.OnAttack();
-
-                    if (enemycharacterManager != null)
-                    {
-                        if (enemycharacterManager.isParrying)
-                        {
-                            hitCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
-                            lastTime = Time.time;
-                            return;
-                        }
-                        else if (enemyStats != null)
-                        {
-                            enemyStats.TakeDamage(currentWeaponDamage);
-                            lastTime = Time.time;
-                            return;
-                        }
-                    }
+                    enemycharacterManager?.OnBeHit(currentWeaponDamage);
+                    //if (enemycharacterManager != null)
+                    //{
+                    //    if (enemycharacterManager.isParrying)
+                    //    {
+                    //        hitCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
+                    //        lastTime = Time.time;
+                    //        return;
+                    //    }
+                    //    else if (enemyStats != null)
+                    //    {
+                    //        enemyStats.TakeDamage(currentWeaponDamage);
+                    //        lastTime = Time.time;
+                    //        return;
+                    //    }
+                    //}
                 }
             }
         }
