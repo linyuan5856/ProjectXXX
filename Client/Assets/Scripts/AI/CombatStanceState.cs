@@ -29,7 +29,6 @@ public class CombatStanceState : State
         //enemyAnimatorManager.anim.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
         attackState.hasPerformedAttack = false;
         turnAttackState.hasPerformedTurnAttack = false;
-        HandleRotateTowardsTarget(enemyManager);
 
         if (enemyManager.isInteracting)
         {
@@ -37,7 +36,7 @@ public class CombatStanceState : State
             enemyAnimatorManager.anim.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
             return this;
         }
-
+        HandleRotateTowardsTarget(enemyManager);
         if (distanceFromTarget > enemyManager.maximumAttackRange) 
             return pursueTargetState;
 
@@ -46,9 +45,10 @@ public class CombatStanceState : State
         RollForTurnChance();
         if (enemyManager.currentRecoveryTime <= 0  && turnOrAttack)
         {
+            Debug.Log("turn");
             turnOrAttack = false;
             bool canUseTurnAttack = turnAttackState.CanUseSkill(enemyManager.transform, enemyManager.currentTarget.transform);
-           
+            Debug.Log(canUseTurnAttack);
             if (canUseTurnAttack) 
                 return turnAttackState;
             return this;

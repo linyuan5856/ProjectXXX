@@ -540,13 +540,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.07999986
-        functionName: CanRotate
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.26136366
         functionName: OpenDamageCollider
         data: 
@@ -554,7 +547,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.42531744
+      - time: 0.3809524
         functionName: StopRotation
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -563,6 +556,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.60064936
         functionName: CloseDamageCollider
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.06222231
+        functionName: CanRotate
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

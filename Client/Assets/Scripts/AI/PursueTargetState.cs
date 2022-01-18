@@ -14,10 +14,11 @@ public class PursueTargetState : State
     {
         distanceFromTarget =
             Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-        HandleRotateTowardsTarget(enemyManager);
 
         if (enemyManager.isInteracting)
             return this;
+
+        HandleRotateTowardsTarget(enemyManager);
         if (enemyStats.currentStamina <= 10)
             return circleState;
 

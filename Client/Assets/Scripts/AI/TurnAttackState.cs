@@ -39,7 +39,7 @@ public class TurnAttackState : State
         if (!hasPerformedTurnAttack)
         {
             enemyManager.currentRecoveryTime = currentRecoverTimer;
-            enemyAnimatorManager.PlayTargetAnimation("Turn_Attack", true);
+            enemyAnimatorManager.PlayTargetAnimationWithRootRotation("Turn_Attack", true);
             hasPerformedTurnAttack = true;
             return combatStanceState;
         }
