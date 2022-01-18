@@ -40,11 +40,10 @@ public class TurnAttackState : State
         {
             enemyManager.currentRecoveryTime = currentRecoverTimer;
             enemyAnimatorManager.PlayTargetAnimationWithRootRotation("Turn_Attack", true);
-            hasPerformedTurnAttack = true;
+            hasPerformedTurnAttack = true;//这个变量要等动画播放完毕 才可以置为False 不然回到CombaStanceState 就立刻重置了
             return combatStanceState;
         }
-        else
-            return this;
+        return this;
     }
 
 

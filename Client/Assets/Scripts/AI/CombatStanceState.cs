@@ -13,13 +13,15 @@ public class CombatStanceState : State
     private float distanceFromTarget;
     private bool turnOrAttack;
 
-    public override void OnEnter(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
+    public override void OnEnter(EnemyManager enemyManager, EnemyStats enemyStats,
+        EnemyAnimatorManager enemyAnimatorManager)
     {
         base.OnEnter(enemyManager, enemyStats, enemyAnimatorManager);
         enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.2f, Time.deltaTime);
         enemyAnimatorManager.anim.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
         enemyManager.NavDisableAgent();
     }
+
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats,
         EnemyAnimatorManager enemyAnimatorManager)
     {
@@ -36,30 +38,26 @@ public class CombatStanceState : State
             enemyAnimatorManager.anim.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
             return this;
         }
-        HandleRotateTowardsTarget(enemyManager);
-        if (distanceFromTarget > enemyManager.maximumAttackRange) 
-            return pursueTargetState;
+        
+        if (distanceFromTarget > enemyManager.maximumAttackRange) return pursueTargetState;
+        if (enemyStats.currentStamina <= 50) return circleState;
 
-        if (enemyStats.currentStamina <= 50) 
-            return circleState;
         RollForTurnChance();
-        if (enemyManager.currentRecoveryTime <= 0  && turnOrAttack)
+        if (enemyManager.currentRecoveryTime <= 0 && turnOrAttack)
         {
-            Debug.Log("turn");
             turnOrAttack = false;
-            bool canUseTurnAttack = turnAttackState.CanUseSkill(enemyManager.transform, enemyManager.currentTarget.transform);
-            Debug.Log(canUseTurnAttack);
-            if (canUseTurnAttack) 
-                return turnAttackState;
+            bool canUseTurnAttack =
+                turnAttackState.CanUseSkill(enemyManager.transform, enemyManager.currentTarget.transform);
+            Debug.Log("Try Turn Attack:  "+canUseTurnAttack);
+            if (canUseTurnAttack) return turnAttackState;
             return this;
         }
-        else if (enemyManager.currentRecoveryTime <= 0 && attackState.currentAttack != null)
-            return attackState;
-        else
-        {
-            GetNewAttack(enemyManager);
-        }
-       
+        HandleRotateTowardsTarget(enemyManager);
+
+        if (enemyManager.currentRecoveryTime <= 0 && attackState.currentAttack != null) return attackState;
+
+        GetNewAttack(enemyManager);
+
         return this;
     }
 
@@ -73,7 +71,7 @@ public class CombatStanceState : State
             direction = transform.forward;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         enemyManager.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,
-        enemyManager.rotationSpeed / Time.deltaTime);
+            enemyManager.rotationSpeed / Time.deltaTime);
 
         //var pos = enemyManager.currentTarget.transform.position;
         //enemyManager.NavSetDestination(new Vector3(pos.x, 0f, pos.z));
