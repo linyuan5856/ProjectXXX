@@ -96,7 +96,7 @@ public class DamageCollider : MonoBehaviour
                     //EnemyStats enemyStats = collision.GetComponentInParent<EnemyStats>();
                     CharacterManager enemycharacterManager = collision.GetComponentInParent<CharacterManager>();
                     //BlockingCollider shield = collision.GetComponentInParent<CharacterManager>().GetComponentInChildren<BlockingCollider>();
-                    Shake(0);
+                    //Shake(0);
                     hitCharacterManager.OnAttack();
                     enemycharacterManager?.OnBeHit(currentWeaponDamage);
                     //if (enemycharacterManager != null)
