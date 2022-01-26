@@ -75,7 +75,7 @@ public class AttackState : State
 
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             enemyManager.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,
-                enemyManager.rotationSpeed / Time.deltaTime);
+                enemyManager.rotationSpeed * Time.deltaTime);
         }
     }
 

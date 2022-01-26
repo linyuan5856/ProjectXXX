@@ -47,7 +47,7 @@ public class PursueTargetState : State
         var pos = enemyManager.currentTarget.transform.position;
         enemyManager.NavSetDestination(new Vector3(pos.x, 0f, pos.z));
         enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation,
-            enemyManager.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
+            enemyManager.transform.rotation, enemyManager.rotationSpeed * Time.deltaTime);
     }
 
     private void RollForJumpChance()

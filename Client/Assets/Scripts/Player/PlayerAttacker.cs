@@ -129,7 +129,7 @@ public class PlayerAttacker : MonoBehaviour
 
         if (isLeftWeapon)
         {
-            animatorHandler.PlayTargetAnimation(playerInventory.leftWeapon.weapon_art, true);
+            animatorHandler.PlayTargetAnimationWithoutFade(playerInventory.leftWeapon.weapon_art, true);
         }
     }
 

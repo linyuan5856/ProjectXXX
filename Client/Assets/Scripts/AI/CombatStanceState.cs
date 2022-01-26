@@ -71,7 +71,7 @@ public class CombatStanceState : State
             direction = transform.forward;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         enemyManager.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,
-            enemyManager.rotationSpeed / Time.deltaTime);
+            enemyManager.rotationSpeed * Time.deltaTime);
 
         //var pos = enemyManager.currentTarget.transform.position;
         //enemyManager.NavSetDestination(new Vector3(pos.x, 0f, pos.z));
