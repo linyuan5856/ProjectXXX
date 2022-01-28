@@ -1151,8 +1151,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 5
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 1012552681675303145}
-  m_Follow: {fileID: 1012552681675303145}
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 0}
   m_AnimatedTarget: {fileID: 6874704034282102059}
   m_LayerIndex: 3
   m_ShowDebugText: 0
@@ -1160,6 +1160,10 @@ MonoBehaviour:
   - {fileID: 1132595768}
   - {fileID: 2077167543}
   m_Instructions:
+  - m_FullHash: 183917527
+    m_VirtualCamera: {fileID: 2077167543}
+    m_ActivateAfter: 0
+    m_MinDuration: 0
   - m_FullHash: -2031234122
     m_VirtualCamera: {fileID: 2077167543}
     m_ActivateAfter: 0
@@ -1169,8 +1173,8 @@ MonoBehaviour:
     m_ActivateAfter: 0
     m_MinDuration: 0
   m_DefaultBlend:
-    m_Style: 1
-    m_Time: 1
+    m_Style: 6
+    m_Time: 0.8
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -2063,7 +2067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: -0.98334193, z: -5.99121}
+  m_FollowOffset: {x: 4.6593537, y: 2.126658, z: 12.858789}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -2312,8 +2316,8 @@ MonoBehaviour:
   m_UpdateMethod: 1
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
+    m_Style: 6
+    m_Time: 0.5
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -8076,8 +8080,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 5
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_LookAt: {fileID: 5332665543753936992}
+  m_Follow: {fileID: 1012552681675303145}
   m_Lens:
     FieldOfView: 22.619865
     OrthographicSize: 10
@@ -8103,15 +8107,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077167542}
-  m_LocalRotation: {x: -0.081250496, y: 0.000000015705895, z: 0.0000000012803449,
-    w: 0.99669373}
-  m_LocalPosition: {x: -0.029353619, y: -3.11, z: -11.21}
+  m_LocalRotation: {x: -0.0014020664, y: 0.98494035, z: -0.007996057, w: -0.17270409}
+  m_LocalPosition: {x: 4.63, y: 0, z: 7.6399994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 893363159}
   m_Father: {fileID: 583053750}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0.25500003, y: -0.03, z: 0}
+  m_LocalEulerAnglesHint: {x: 1.0320001, y: 3.131, z: 0.056}
 --- !u!1 &2113232716
 GameObject:
   m_ObjectHideFlags: 0
