@@ -53,6 +53,9 @@ public class PursueTargetState : State
     private void RollForJumpChance()
     {
         float jumpChance = Random.Range(0, 100);
-        jumpOrAttack = jumpChance > 60;
+        if (jumpChance > 70)
+            jumpOrAttack = true;
+        else
+            jumpOrAttack = false;
     }
 }

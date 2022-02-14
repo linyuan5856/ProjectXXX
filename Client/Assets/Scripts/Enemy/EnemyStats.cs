@@ -6,7 +6,7 @@ public class EnemyStats : CharacterStats
     EnemyManager enemyManager;
     UIBossHealthBar UIBossHealthBar;
 
-    public float staminaRegenerationAmount = 100f;
+    public float staminaRegenerationAmount;
     public float staminaRegenTimer = 0;
 
     Animator animator;
@@ -97,7 +97,7 @@ public class EnemyStats : CharacterStats
 
             if (currentStamina < maxStamina && staminaRegenTimer > 1f)
             {
-                currentStamina += staminaRegenerationAmount * Time.deltaTime * 10;
+                currentStamina += staminaRegenerationAmount * Time.deltaTime * 1;
                 // staminaBar.SetCurrentStamina(Mathf.RoundToInt(currentStamina));
             }
         }

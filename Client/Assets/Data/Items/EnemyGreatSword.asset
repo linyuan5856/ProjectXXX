@@ -29,5 +29,5 @@ MonoBehaviour:
   weapon_art: 
   baseStamina: 20
   lightAttackMultiplier: 3
-  heavyAttackMultiplier: 2
+  heavyAttackMultiplier: 6
   isShieldWeapon: 0
