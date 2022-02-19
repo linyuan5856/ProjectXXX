@@ -519,8 +519,8 @@ ModelImporter:
       name: GreatSword_Attack01
       takeName: GreatSword_Attack01_Inplace
       internalID: 0
-      firstFrame: 333
-      lastFrame: 807
+      firstFrame: 419
+      lastFrame: 743
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

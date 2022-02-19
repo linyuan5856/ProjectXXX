@@ -551,6 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pursueTargetState: {fileID: 738684434}
+  jumpAttackState: {fileID: 856058713}
   detectionLayer:
     serializedVersion: 2
     m_Bits: 2048
@@ -1174,7 +1175,7 @@ MonoBehaviour:
     m_MinDuration: 0
   m_DefaultBlend:
     m_Style: 6
-    m_Time: 0.8
+    m_Time: 0.5
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -1928,8 +1929,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combatStanceState: {fileID: 1360121106}
   circleState: {fileID: 1391222065}
-  rotateTowardsTargetState: {fileID: 1053008831}
-  jumpAttackState: {fileID: 856058713}
   distanceFromTarget: 0
 --- !u!1 &856058711
 GameObject:
@@ -1976,7 +1975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinJumpDistance: 5
   MaxJumpDistance: 10
-  pursueTargetState: {fileID: 738684434}
+  idleState: {fileID: 304654638}
   HeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -2210,7 +2209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateTowardsTargetState: {fileID: 1053008831}
   combatStanceState: {fileID: 1360121106}
-  pursueTargetState: {fileID: 738684434}
+  pursueTargetState: {fileID: 0}
   currentAttack: {fileID: 0}
   hasPerformedAttack: 0
 --- !u!1 &963194225
@@ -5329,7 +5328,7 @@ MonoBehaviour:
   enemyAttacks:
   - {fileID: 11400000, guid: 2407d0650d18d50458d18c8f634735e9, type: 2}
   - {fileID: 11400000, guid: 50ec5b004f21ff143b9928f3b5a9e60b, type: 2}
-  pursueTargetState: {fileID: 738684434}
+  idleState: {fileID: 304654638}
   circleState: {fileID: 1391222065}
   turnAttackState: {fileID: 500325728}
 --- !u!4 &1360121107
@@ -8055,6 +8054,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2077167544}
   - component: {fileID: 2077167543}
+  - component: {fileID: 2077167545}
   m_Layer: 0
   m_Name: CM vcam2
   m_TagString: Untagged
@@ -8115,6 +8115,22 @@ Transform:
   m_Father: {fileID: 583053750}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 1.0320001, y: 3.131, z: 0.056}
+--- !u!114 &2077167545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077167542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: -1
+  m_Gain: 1
+  m_Use2DDistance: 0
 --- !u!1 &2113232716
 GameObject:
   m_ObjectHideFlags: 0
@@ -8821,7 +8837,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 500

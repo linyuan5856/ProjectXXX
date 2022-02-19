@@ -5,7 +5,7 @@ public class JumpAttackState : State
 {
     public float MinJumpDistance = 5f;
     public float MaxJumpDistance = 7f;
-    public PursueTargetState pursueTargetState;
+    public IdleState idleState;
     public AnimationCurve HeightCurve;
     public float JumpSpeed = 2;
     public float currentRecoverTimer = 3;
@@ -36,7 +36,7 @@ public class JumpAttackState : State
         if (!bJumping)
             StartCoroutine(Jump(enemyManager.transform, enemyManager.currentTarget.transform));
         if (bJumpEnd)
-            return pursueTargetState;
+            return idleState;
         return this;
     }
 

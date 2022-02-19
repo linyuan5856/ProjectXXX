@@ -4,10 +4,10 @@ public class PursueTargetState : State
 {
     public CombatStanceState combatStanceState;
     public CircleState circleState;
-    public RotateTowardsTargetState rotateTowardsTargetState;
-    public JumpAttackState jumpAttackState;
+   // public RotateTowardsTargetState rotateTowardsTargetState;
+   // public JumpAttackState jumpAttackState;
     public float distanceFromTarget;
-    private bool jumpOrAttack;
+    //private bool jumpOrAttack;
 
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats,
         EnemyAnimatorManager enemyAnimatorManager)
@@ -22,14 +22,20 @@ public class PursueTargetState : State
         if (enemyStats.currentStamina <= 10)
             return circleState;
 
-        RollForJumpChance();
-        if (jumpOrAttack)
-        {
-            jumpOrAttack = false;
-            bool canUseJumpAttack = jumpAttackState.CanUseSkill(enemyManager.transform, enemyManager.currentTarget.transform);
-            if (canUseJumpAttack) return jumpAttackState;
-            return this;
-        }
+        //RollForJumpChance();
+        //if (jumpOrAttack)
+        //{
+        //    jumpOrAttack = false;
+        //    bool canUseJumpAttack = jumpAttackState.CanUseSkill(enemyManager.transform, enemyManager.currentTarget.transform);
+        //    if (canUseJumpAttack) return jumpAttackState;
+        //    else if (distanceFromTarget > enemyManager.maximumAttackRange)
+        //    {
+        //        enemyAnimatorManager.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+        //        enemyAnimatorManager.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
+        //        enemyManager.NavSetDestination(enemyManager.currentTarget.transform.position);
+        //        return this;
+        //    }
+        //}
 
         if (distanceFromTarget > enemyManager.maximumAttackRange)
         {
@@ -50,12 +56,5 @@ public class PursueTargetState : State
             enemyManager.transform.rotation, enemyManager.rotationSpeed * Time.deltaTime);
     }
 
-    private void RollForJumpChance()
-    {
-        float jumpChance = Random.Range(0, 100);
-        if (jumpChance > 70)
-            jumpOrAttack = true;
-        else
-            jumpOrAttack = false;
-    }
+   
 }

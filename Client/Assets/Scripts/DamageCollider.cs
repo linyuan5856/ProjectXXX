@@ -71,8 +71,10 @@ public class DamageCollider : MonoBehaviour
                         else if (playerStats != null)
                         {
                             EnemyManager manager = (EnemyManager)hitCharacterManager;
+                            
                             if (manager.AttackState == EnemyStates.JUMP_ATTACK)
                             {
+                                Shake(0);
                                 playerStats.TakeDamage(currentWeaponDamage, "Damage_02");
                                 lastTime = Time.time;
                                 return;
@@ -122,7 +124,8 @@ public class DamageCollider : MonoBehaviour
 
      private void Shake(int a)
      {
-         cameraManager.ShakeScreen(a);
+        Debug.Log("准备震动"); 
+        cameraManager.ShakeScreen(a);
      } 
 
    

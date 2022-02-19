@@ -4,7 +4,7 @@ public class CombatStanceState : State
 {
     public AttackState attackState;
     public EnemyAttackAction[] enemyAttacks;
-    public PursueTargetState pursueTargetState;
+    public IdleState idleState;
     public CircleState circleState;
     public TurnAttackState turnAttackState;
 
@@ -39,22 +39,27 @@ public class CombatStanceState : State
             return this;
         }
         
-        if (distanceFromTarget > enemyManager.maximumAttackRange) return pursueTargetState;
-        if (enemyStats.currentStamina <= 50) return circleState;
+        if (distanceFromTarget > enemyManager.maximumAttackRange) 
+            return idleState;
 
-        RollForTurnChance();
-        if (enemyManager.currentRecoveryTime <= 0 && turnOrAttack)
-        {
-            turnOrAttack = false;
-            bool canUseTurnAttack =
-                turnAttackState.CanUseSkill(enemyManager.transform, enemyManager.currentTarget.transform);
-            Debug.Log("Try Turn Attack:  "+canUseTurnAttack);
-            if (canUseTurnAttack) return turnAttackState;
-            return this;
-        }
+        if (enemyStats.currentStamina <= 30) 
+            return circleState;
+
+        //RollForTurnChance();
+        //if (enemyManager.currentRecoveryTime <= 0 && turnOrAttack)
+        //{
+        //    turnOrAttack = false;
+        //    bool canUseTurnAttack =
+        //        turnAttackState.CanUseSkill(enemyManager.transform, enemyManager.currentTarget.transform);
+        //    Debug.Log("Try Turn Attack:  "+canUseTurnAttack);
+        //    if (canUseTurnAttack) 
+        //        return turnAttackState;
+        //    return this;
+        //}
         HandleRotateTowardsTarget(enemyManager);
 
-        if (enemyManager.currentRecoveryTime <= 0 && attackState.currentAttack != null) return attackState;
+        if (enemyManager.currentRecoveryTime <= 0 && attackState.currentAttack != null) 
+            return attackState;
 
         GetNewAttack(enemyManager);
 

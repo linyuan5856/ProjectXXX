@@ -3,7 +3,9 @@
 public class IdleState : State
 {
     public PursueTargetState pursueTargetState;
+    public JumpAttackState jumpAttackState;
     public LayerMask detectionLayer;
+    private bool jumpOrAttack;
 
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
     {
@@ -26,12 +28,29 @@ public class IdleState : State
 
         if (enemyManager.currentTarget != null)
         {
-            //bool canUseJumpAttack = jumpAttackState.CanUseSkill(enemyManager.transform, enemyManager.currentTarget.transform);
-            //if (canUseJumpAttack )
-            //      return jumpAttackState;
+            RollForJumpChance();
+            if (jumpOrAttack)
+            {
+                jumpOrAttack = false;
+                bool canUseJumpAttack = jumpAttackState.CanUseSkill(enemyManager.transform, enemyManager.currentTarget.transform);
+                if (canUseJumpAttack)
+                    return jumpAttackState;
 
-            return pursueTargetState;
+                else
+                    return pursueTargetState;
+            }
+            else
+                return pursueTargetState;
         }
         return this;
+    }
+
+    private void RollForJumpChance()
+    {
+        float jumpChance = Random.Range(0, 100);
+        if (jumpChance > 30)
+            jumpOrAttack = true;
+        else
+            jumpOrAttack = false;
     }
 }

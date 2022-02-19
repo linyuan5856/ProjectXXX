@@ -13,6 +13,7 @@ public class CameraManager : MonoBehaviour
 
     public void ShakeScreen(int a)
     {
+        Debug.Log("进入震动");
         cinemachineImpulseSource.m_ImpulseDefinition.m_RawSignal = RawSignal_sword[a];
         cinemachineImpulseSource.GenerateImpulse();
     }
