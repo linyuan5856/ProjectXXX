@@ -2209,7 +2209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateTowardsTargetState: {fileID: 1053008831}
   combatStanceState: {fileID: 1360121106}
-  pursueTargetState: {fileID: 0}
+  pursueTargetState: {fileID: 738684434}
   currentAttack: {fileID: 0}
   hasPerformedAttack: 0
 --- !u!1 &963194225
