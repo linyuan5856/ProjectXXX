@@ -67,7 +67,7 @@ public class DamageCollider : MonoBehaviour
                                 playerStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block_Guard");
                                 lastTime = Time.time;
                             }
-                            playerCharacterManager.OnBeHit(0);
+                           
                         }
                         else if (playerStats != null)
                         {
@@ -76,6 +76,7 @@ public class DamageCollider : MonoBehaviour
                             if (manager.AttackState == EnemyStates.JUMP_ATTACK)
                             {
                                 Shake(0);
+                                playerCharacterManager.OnBeHit(0);
                                 playerStats.TakeDamage(currentWeaponDamage, "Damage_02");
                                 lastTime = Time.time;
                                 return;

@@ -547,7 +547,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.23342176
+      - time: 0.12297399
         functionName: OpenDamageCollider
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -570,6 +570,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.40841272
         functionName: CanRotate
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.4755555
+        functionName: DrainStaminalLightAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -598,13 +605,6 @@ ModelImporter:
         messageOptions: 0
       - time: 0.7973184
         functionName: DisableCombo
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.4755555
-        functionName: DrainStaminalLightAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
