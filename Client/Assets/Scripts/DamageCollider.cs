@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DamageCollider : MonoBehaviour
 {
@@ -12,6 +10,7 @@ public class DamageCollider : MonoBehaviour
     public int currentWeaponDamage = 5;
     GameObject owner;
     float lastTime;
+
     private void Awake()
     {
         damageCollider = GetComponent<Collider>();
@@ -20,7 +19,6 @@ public class DamageCollider : MonoBehaviour
         damageCollider.enabled = false;
         cameraManager = GetComponent<CameraManager>();
         owner = damageCollider.gameObject;
-        
     }
 
     public void EnableDamageCollider()
@@ -44,34 +42,37 @@ public class DamageCollider : MonoBehaviour
                 if (owner.tag == "EnemyWeapon")
                 {
                     PlayerStats playerStats = collision.GetComponentInParent<PlayerStats>();
-                    CharacterManager playercharacterManager = collision.GetComponentInParent<CharacterManager>();//玩家
-                    BlockingCollider shield = collision.GetComponentInParent<CharacterManager>().GetComponentInChildren<BlockingCollider>();
-                    playercharacterManager.isInteracting = true;
+                    CharacterManager playerCharacterManager = collision.GetComponentInParent<CharacterManager>(); //玩家
+                    BlockingCollider shield = collision.GetComponentInParent<CharacterManager>()
+                        .GetComponentInChildren<BlockingCollider>();
+                    playerCharacterManager.isInteracting = true;
                     hitCharacterManager.OnAttack();
-                    if (playercharacterManager != null)
+                    if (playerCharacterManager != null)
                     {
-                        if (playercharacterManager.isParrying)
+                        if (playerCharacterManager.isParrying)
                         {
                             //Debug.Log(characterManager.GetComponentInChildren<AnimatorManager>());
-                            hitCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
+                            hitCharacterManager.GetComponentInChildren<AnimatorManager>()
+                                .PlayTargetAnimation("Parried", true);
                             lastTime = Time.time;
-                            return;
                         }
-                        else if (shield != null && playercharacterManager.isBlocking)
+                        else if (shield != null && playerCharacterManager.isBlocking)
                         {
-                            float physicalDamageAfterBlock = currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
+                            float physicalDamageAfterBlock = currentWeaponDamage -
+                                                             (currentWeaponDamage *
+                                                              shield.blockingPhysicalDamageAbsorption) / 100;
 
                             if (playerStats != null)
                             {
                                 playerStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block_Guard");
                                 lastTime = Time.time;
-                                return;
                             }
+                            playerCharacterManager.OnBeHit(0);
                         }
                         else if (playerStats != null)
                         {
                             EnemyManager manager = (EnemyManager)hitCharacterManager;
-                            
+
                             if (manager.AttackState == EnemyStates.JUMP_ATTACK)
                             {
                                 Shake(0);
@@ -79,14 +80,12 @@ public class DamageCollider : MonoBehaviour
                                 lastTime = Time.time;
                                 return;
                             }
-                            else
-                                playerStats.TakeDamage(currentWeaponDamage);
-                                lastTime = Time.time;
-                                return;
 
+                            playerStats.TakeDamage(currentWeaponDamage);
+                            lastTime = Time.time;
+                            playerCharacterManager.OnBeHit(0);
                         }
                     }
-
                 }
             }
 
@@ -119,14 +118,11 @@ public class DamageCollider : MonoBehaviour
                 }
             }
         }
-            
     }
 
-     private void Shake(int a)
-     {
-        Debug.Log("准备震动"); 
+    private void Shake(int a)
+    {
+        Debug.Log("准备震动");
         cameraManager.ShakeScreen(a);
-     } 
-
-   
+    }
 }

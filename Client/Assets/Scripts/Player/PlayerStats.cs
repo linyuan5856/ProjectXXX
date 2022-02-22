@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
@@ -58,12 +56,8 @@ public class PlayerStats : CharacterStats
     public void TakeDamage(int damage, string damageAnimation = "Damage_01")
     {
        // Debug.Log(damage);
-        if (playerManager.isInvulnerable)
-            return;
-
-        if (isDead)
-            return;
-
+        if (playerManager.isInvulnerable||isDead) return;
+        
         currentHealth = currentHealth - damage;
         //Debug.Log(currentHealth);
         healthBar.SetCurrentHealth(currentHealth);

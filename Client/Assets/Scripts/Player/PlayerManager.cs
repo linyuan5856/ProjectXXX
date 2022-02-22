@@ -8,6 +8,8 @@ public class PlayerManager : CharacterManager
     Animator anim;
     PlayerLocomotion playerLocomotion;
     PlayerStats playerStats;
+    [SerializeField] private GameObject beHitEffect;
+    [SerializeField] private Transform beHitPoint;
 
    // public bool isInteracting;
 
@@ -108,5 +110,14 @@ public class PlayerManager : CharacterManager
         {
             anim.speed = 0f;
         }
+    }
+
+    public override void OnBeHit(int damage)
+    {
+        base.OnBeHit(damage);
+        if(beHitEffect==null) return;
+       var vfx= Instantiate(beHitEffect);
+       vfx.transform.SetParent(beHitPoint,false);
+       vfx.transform.localPosition=Vector3.zero;
     }
 }
